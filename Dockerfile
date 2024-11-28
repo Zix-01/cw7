@@ -11,11 +11,8 @@ ENV PYTHONUNBUFFERED=1
 
 EXPOSE 8000
 
-# копипаст скрипта в контейнер
 COPY entrypoint.sh /entrypoint.sh
 
-# Права выполнения скрипта
 RUN chmod +x /entrypoint.sh
 
-# Точка входа контейнера
 ENTRYPOINT ["/entrypoint.sh"]
