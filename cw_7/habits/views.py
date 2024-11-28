@@ -7,9 +7,6 @@ from habits.serializers import HabitSerializer
 
 
 class MyHabitsViewSet(viewsets.ModelViewSet):
-    """
-    ViewSet для работы с собственными привычками пользователя.
-    """
     serializer_class = HabitSerializer
     permission_classes = [IsOwner]
     pagination_class = MyPageNumberPagination
@@ -19,9 +16,7 @@ class MyHabitsViewSet(viewsets.ModelViewSet):
 
 
 class PublicHabitsViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    ViewSet для работы с публичными привычками.
-    """
+
     serializer_class = HabitSerializer
 
     def get_queryset(self):
