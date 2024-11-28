@@ -34,5 +34,5 @@ class Habit(models.Model):
                 f'{self.place}|{self.duration}|{self.is_pleasant}')
 
     class Meta:
-        verbose_name = 'Привычка'
-        verbose_name_plural = 'Привычки'
+        verbose_name = 'Привычка.'
+        verbose_name_plural = 'Привычки.'

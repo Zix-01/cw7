@@ -9,8 +9,7 @@ load_dotenv(dotenv_path='.env.prod')
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-
-TLG_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 
 DEBUG = os.getenv('DJANGO_DEBUG', False).lower() == 'true'
 
@@ -58,7 +57,6 @@ if DEBUG:
 else:
     CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
 
-
 INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
@@ -76,7 +74,6 @@ INSTALLED_APPS = [
     'users',
     'habits',
 ]
-
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -107,7 +104,6 @@ TEMPLATES = [
     },
 ]
 
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -137,7 +133,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -158,11 +153,9 @@ if CACHES_ENABLED:
         }
     }
 
-
 AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-
 
 CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
 CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
@@ -176,7 +169,6 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': timedelta(seconds=30),
     },
 }
-
 
 CELERY_TASK_ALWAYS_EAGER = os.getenv('CELERY_TASK_ALWAYS_EAGER', False).lower() == 'true'
 
