@@ -5,12 +5,9 @@ from django.db import models
 NULLABLE = {'blank': True, 'null': True}
 
 
-# Кастомный менеджер пользователя
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, first_name, password=None, **extra_fields):
-        """
-        Создает и возвращает пользователя с email, именем и паролем.
-        """
+
         if not email:
             raise ValueError('Email must be set')
         if not first_name:
@@ -23,9 +20,6 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, first_name, password=None, **extra_fields):
-        """
-        Создает и возвращает суперпользователя с email, именем и паролем.
-        """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 

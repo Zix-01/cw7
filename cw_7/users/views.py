@@ -13,9 +13,7 @@ from users.serializers import (
 )
 
 
-# ------------------------------------------------------ юзеры ------------------------------------------------------
 class UserCreateView(generics.CreateAPIView):
-    """Создание нового юзера"""
     queryset = User.objects.all()
     serializer_class = RegisterUserSerializer
     permission_classes = [AllowAny]
@@ -27,17 +25,12 @@ class UserCreateView(generics.CreateAPIView):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    """
-    ViewSet для просмотра, редактирования и деактивации пользователя.
-    """
+
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsUser | IsAdminUser]
 
     def get_queryset(self):
-        """
-        Возвращает список пользователей в зависимости от прав доступа.
-        """
         if self.request.user.has_perm('users.is_admin'):
             return User.objects.all()
         return User.objects.filter(id=self.request.user.id)
@@ -46,9 +39,6 @@ class UserViewSet(viewsets.ModelViewSet):
         raise MethodNotAllowed('POST', detail='Создание профиля через этот эндпоинт запрещено.')
 
     def destroy(self, request, *args, **kwargs):
-        """
-        Деактивирует пользователя вместо его удаления.
-        """
         user = self.get_object()
         user.is_active = False
         user.save()

@@ -14,12 +14,11 @@ from users.views import (
 app_name = UsersConfig.name
 
 router = DefaultRouter()
-router.register(r'profile', UserViewSet)  # ----- профиль -----
+router.register(r'profile', UserViewSet)
 
 urlpatterns = [
                   path('', include(router.urls)),
 
-                  # ----- регистрация и токен -----
                   path('register/', UserCreateView.as_view(), name='register_api'),
                   path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
                   path('token-refresh/', MyTokenRefreshView.as_view(), name='token_refresh'),

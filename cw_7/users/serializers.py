@@ -5,8 +5,6 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, Toke
 from users.models import User
 
 
-#  ------------------------------------------------------ юзеры ------------------------------------------------------
-
 class RegisterUserSerializer(ModelSerializer):
 
     class Meta:
@@ -20,7 +18,6 @@ class UserSerializer(ModelSerializer):
         fields = ['id', 'first_name', 'email', 'phone_number', 'telegram_chat_id']
 
     def validate(self, attrs):
-        """Проверка на изменения системных полей"""
         read_only_fields = ['id', 'last_login', 'is_superuser', 'is_staff', 'groups', 'user_permissions']
 
         for field in read_only_fields:
@@ -34,7 +31,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
 
-        # Добавление пользовательских полей в токен
         token['first_name'] = user.first_name
         token['email'] = user.email
 
